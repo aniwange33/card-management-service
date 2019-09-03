@@ -7,6 +7,7 @@ import com.vela.cardmanageservice.domain.gateway.CardVerificationStatisticDomain
 import com.vela.cardmanageservice.domain.model.CardSchemeTypeAndBank;
 import com.vela.cardmanageservice.infrastructure.gatewayImpl.model.GeneralResponse;
 import com.vela.cardmanageservice.infrastructure.persistence.entity.CardDetail;
+import com.vela.cardmanageservice.infrastructure.persistence.impl.CardDetailsRepositoryService;
 import com.vela.cardmanageservice.infrastructure.persistence.repository.CardDetailRepository;
 import com.vela.cardmanageservice.usecase.ProvideVerificationCardStatistics;
 import com.vela.cardmanageservice.usecase.VerifyACard;
@@ -32,6 +33,8 @@ public class CardManagementServiceDomainGatewayImpl implements CardVerificationD
     ProvideVerificationCardStatistics provideVerificationCardStatistics;
     @Autowired
     VerifyACard verifyACard;
+    @Autowired
+    CardDetailsRepositoryService repositoryService;
 
     final static String BASE_URL="https://lookup.binlist.net";
     @Override
@@ -54,9 +57,9 @@ public class CardManagementServiceDomainGatewayImpl implements CardVerificationD
         }
         GeneralResponse response=responseOptional.get();
         if(cardDetailRepository.findByIin(cardNumber).isPresent()){
-            provideVerificationCardStatistics.updateStats(cardNumber);
+            repositoryService.updateStats(cardNumber);
         }else {
-            provideVerificationCardStatistics.insert(CardDetail.createCardDetail(cardNumber,response.getScheme(),response.getBank().getName(),1));
+            repositoryService.insert(CardDetail.createCardDetail(cardNumber,response.getScheme(),response.getBank().getName(),1));
         }
         return CardVerificationDomain.createCardVerificationDomain(true, CardSchemeTypeAndBank.from(response.getScheme(),response.getType(),response.getBank().getName()));
     }
