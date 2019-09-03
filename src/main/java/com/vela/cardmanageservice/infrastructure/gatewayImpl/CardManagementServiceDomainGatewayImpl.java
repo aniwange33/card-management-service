@@ -27,10 +27,7 @@ public class CardManagementServiceDomainGatewayImpl implements CardVerificationD
     RestTemplate restTemplateConfig;
     @Autowired
     CardDetailRepository cardDetailRepository;
-    @Autowired
-    ProvideVerificationCardStatistics provideVerificationCardStatistics;
-    @Autowired
-    VerifyACard verifyACard;
+
     @Autowired
     CardDetailsRepositoryService repositoryService;
 
