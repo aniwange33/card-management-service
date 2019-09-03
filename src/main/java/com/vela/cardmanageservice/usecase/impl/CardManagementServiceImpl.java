@@ -4,8 +4,7 @@ import com.vela.cardmanageservice.domain.CardVerificationDomain;
 import com.vela.cardmanageservice.domain.CardVerificationStatisticDomain;
 import com.vela.cardmanageservice.domain.gateway.CardVerificationDomainGateway;
 import com.vela.cardmanageservice.domain.gateway.CardVerificationStatisticDomainGateway;
-import com.vela.cardmanageservice.usecase.ProvideVerificationCardStatistics;
-import com.vela.cardmanageservice.usecase.VerifyACard;
+import com.vela.cardmanageservice.usecase.CardManagementService;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,7 +13,7 @@ import java.security.GeneralSecurityException;
 
 
 @Named
-public class CardManagementServiceImpl implements ProvideVerificationCardStatistics, VerifyACard {
+public class CardManagementServiceImpl implements CardManagementService {
 
    private final CardVerificationDomainGateway          managementServiceDomainGateway;
     private final CardVerificationStatisticDomainGateway cardVerificationStatisticDomainGateway;

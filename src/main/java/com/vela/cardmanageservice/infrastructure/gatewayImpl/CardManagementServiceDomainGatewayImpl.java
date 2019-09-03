@@ -9,8 +9,6 @@ import com.vela.cardmanageservice.infrastructure.gatewayImpl.model.GeneralRespon
 import com.vela.cardmanageservice.infrastructure.persistence.entity.CardDetail;
 import com.vela.cardmanageservice.infrastructure.persistence.impl.CardDetailsRepositoryService;
 import com.vela.cardmanageservice.infrastructure.persistence.repository.CardDetailRepository;
-import com.vela.cardmanageservice.usecase.ProvideVerificationCardStatistics;
-import com.vela.cardmanageservice.usecase.VerifyACard;
 import com.vela.cardmanageservice.usecase.exception.GenericInputErrorException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +41,7 @@ public class CardManagementServiceDomainGatewayImpl implements CardVerificationD
             throw new GenericInputErrorException("Card Number is empty");
          }
         if(!StringUtils.isNumeric(cardNumber)){
-            throw new GenericInputErrorException("Card Number should be Aa number");
+            throw new GenericInputErrorException("Card Number should be A number");
         }
         if(cardNumber.length()<6){
             throw new GenericInputErrorException("Card Number most be upto 6 digit");
